@@ -1,0 +1,17 @@
+------------------------------------------------------------
+CHECKPOINT 2 - ENTERPRISE APPLICATION DEVELOPMENT
+PROJETO: API BRINQUEDOS (SPRING BOOT + ORACLE)
+------------------------------------------------------------
+
+NOME: Maria Gabriela Landim Severo
+RM: 565146
+TURMA: 2TDSR
+
+NOME: Samara Porto
+RM: 559072
+TURMA: 2TDSR
+
+Link do Repositório GitHub:
+https://github.com/gabrielalandim/checkpoint2-brinquedos.git
+
+------------------------------------------------------------

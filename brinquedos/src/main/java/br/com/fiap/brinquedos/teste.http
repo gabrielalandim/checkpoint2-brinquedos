@@ -1,0 +1,14 @@
+### Teste de Cadastro (POST)
+POST http://localhost:8080/brinquedos
+Content-Type: application/json
+
+{
+  "nome": "Carrinho de Controle",
+  "tipo": "Veiculo",
+  "classificacao": "8+",
+  "tamanho": "Medio",
+  "preco": 120.0
+}
+
+### Teste de Listagem (GET)
+GET http://localhost:8080/brinquedos

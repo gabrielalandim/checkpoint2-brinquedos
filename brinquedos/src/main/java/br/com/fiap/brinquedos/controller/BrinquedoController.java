@@ -16,17 +16,44 @@ public class BrinquedoController {
     @Autowired
     private BrinquedoRepository repository;
 
-    // CREATE: Criar um novo brinquedo (POST)
+    // 1. CREATE: Criar um novo brinquedo (POST)
     @PostMapping
     public ResponseEntity<Brinquedo> criarBrinquedo(@RequestBody Brinquedo brinquedo) {
         Brinquedo novoBrinquedo = repository.save(brinquedo);
         return new ResponseEntity<>(novoBrinquedo, HttpStatus.CREATED);
     }
 
-    // READ: Buscar todos os brinquedos (GET)
+    // 2. READ: Buscar todos os brinquedos (GET)
     @GetMapping
     public ResponseEntity<List<Brinquedo>> listarTodos() {
         List<Brinquedo> brinquedos = repository.findAll();
         return ResponseEntity.ok(brinquedos);
+    }
+
+    // 3. UPDATE: Atualizar um brinquedo existente (PUT)
+    @PutMapping("/{id}")
+    public ResponseEntity<Brinquedo> atualizarBrinquedo(@PathVariable Long id, @RequestBody Brinquedo brinquedoAtualizado) {
+        return repository.findById(id)
+                .map(brinquedo -> {
+                    brinquedo.setNome(brinquedoAtualizado.getNome());
+                    brinquedo.setTipo(brinquedoAtualizado.getTipo());
+                    brinquedo.setClassificacao(brinquedoAtualizado.getClassificacao());
+                    brinquedo.setTamanho(brinquedoAtualizado.getTamanho());
+                    brinquedo.setPreco(brinquedoAtualizado.getPreco());
+                    Brinquedo atualizado = repository.save(brinquedo);
+                    return ResponseEntity.ok(atualizado);
+                })
+                .orElse(ResponseEntity.notFound().build());
+    }
+
+    // 4. DELETE: Excluir um brinquedo pelo ID (DELETE)
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deletarBrinquedo(@PathVariable Long id) {
+        return repository.findById(id)
+                .map(brinquedo -> {
+                    repository.delete(brinquedo);
+                    return ResponseEntity.noContent().<Void>build();
+                })
+                .orElse(ResponseEntity.notFound().build());
     }
 }
